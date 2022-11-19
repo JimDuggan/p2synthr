@@ -1,0 +1,21 @@
+Package: p2synthr
+Title: Synthetic Data Generator for Epidemiological Data
+Version: 0.0.1
+Authors@R: 
+    person(given = "Jim",
+           family = "Duggan",
+           role = c("aut", "cre"),
+           email = "jim.duggan@universityofgalway.ie",
+           comment = c(ORCID = "0000-0002-7507-8617"))
+Description: Provides a set of functions that can be used to generate synthetic epi data
+License: Creative Commons Attribution 4.0 International License
+Copyright: inst/COPYRIGHTS
+Depends: R (>= 2.10)
+Suggests: 
+    dplyr, tidyr
+Imports: 
+    tibble
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/JimDuggan/p2synthr
+RoxygenNote: 7.2.1
