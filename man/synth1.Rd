@@ -12,9 +12,13 @@ synth1(ts_data, group_names, group_prob, setSeed = F, seedValue = 100)
 \item{group_names}{the sub-group names}
 
 \item{group_prob}{the probability of each sub-group appearing}
+
+\item{setSeed}{allows setting of the seed for sampling}
+
+\item{seedValue}{set the seed value to be used if needed}
 }
 \value{
-tibble with results
+tibble with results, including original value. Each group has a column
 }
 \description{
 \code{synth1} Disaggregates a time series by sub-groups

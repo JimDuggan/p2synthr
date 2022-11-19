@@ -1,6 +1,13 @@
 library(dplyr)
 library(ggplot2)
 library(tidyr)
+library(p2synthr)
+
+# Some useful commands for package building
+# devtools::document() for dcoumentation
+# devtools::check()
+# devtools::build()
+# devtools::install_github(“JimDuggan/p2synthr”)
 
 irl <- owid |>
         filter(location=="Ireland") |>
@@ -17,4 +24,4 @@ irl_tidy <- irl_syn |>
                           values_to="Incidence",
                           `00-19`:`40+`)
 
-ggplot(irl_tidy,aes(x=Day,y=Incidence,fill=Age))+geom_area()
+ggplot(irl_tidy,aes(x=Day,y=Incidence,fill=Age))+geom_area()+ggtitle("Synthetic Data")

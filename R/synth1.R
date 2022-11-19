@@ -1,19 +1,21 @@
 library(dplyr)
 
-#' \code{synth1} Disaggregates a time series by sub-groups
+#' \code{synth1} Disaggregates a time series by sub-groups. NA values return zeros.
 #'
 #' @param ts_data is the time series to be disaggregated
 #' @param group_names the sub-group names
 #' @param group_prob the probability of each sub-group appearing
-#' @return tibble with results
+#' @param setSeed allows setting of the seed for sampling
+#' @param seedValue set the seed value to be used if needed
+#' @return tibble with results, including original value. Each group has a column.
 #' @export
 
 synth1<- function(ts_data, group_names, group_prob, setSeed=F, seedValue=100){
   # Check input formats
   if(!is.atomic(ts_data))
-    stop("Error, ts must be an atomic vector")
+    stop("Error, ts_data must be an atomic vector")
   else if(!is.numeric(ts_data))
-           stop("Error, input ts must be numeric")
+           stop("Error, input ts_data must be numeric")
   else if(length(group_names) != length(group_prob))
           stop("Error, length of group_names and group_prob not equal")
   else if(sum(group_prob) != 1.0)
