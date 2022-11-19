@@ -2,7 +2,7 @@
 % Please edit documentation in R/synth1.R
 \name{synth1}
 \alias{synth1}
-\title{\code{synth1} Disaggregates a time series by sub-groups}
+\title{\code{synth1} Disaggregates a time series by sub-groups. NA values return zeros.}
 \usage{
 synth1(ts_data, group_names, group_prob, setSeed = F, seedValue = 100)
 }
@@ -18,8 +18,8 @@ synth1(ts_data, group_names, group_prob, setSeed = F, seedValue = 100)
 \item{seedValue}{set the seed value to be used if needed}
 }
 \value{
-tibble with results, including original value. Each group has a column
+tibble with results, including original value. Each group has a column.
 }
 \description{
-\code{synth1} Disaggregates a time series by sub-groups
+\code{synth1} Disaggregates a time series by sub-groups. NA values return zeros.
 }

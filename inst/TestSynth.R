@@ -7,7 +7,8 @@ library(p2synthr)
 # devtools::document() for dcoumentation
 # devtools::check()
 # devtools::build()
-# devtools::install_github(“JimDuggan/p2synthr”)
+# devtools::install_github("JimDuggan/p2synthr")
+# install.packages("p2synthr_0.0.1.tar.gz",repos = NULL,type="source")
 
 irl <- owid |>
         filter(location=="Ireland") |>
