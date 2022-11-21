@@ -1,5 +1,5 @@
 ### p2synthr
-The aim of this package is to provide functions to generate synthetic sub-groups of real data. 
+The aim of this package is to provide functions to generate synthetic sub-groups of real data. This is being developed as part of the [EU-funded PANDEM-2 Project](https://pandem-2.eu)
 
 Acknowledgement: The package also includes data from the [our world in data COVID-19 dataset.](https://ourworldindata.org)
 
@@ -11,7 +11,7 @@ devtools::install_github("JimDuggan/p2synthr")
 Here are some example that may be useful
 
 - [Creating synthetic data from our world in data](
-https://github.com/JimDuggan/aimsir17/tree/master/data-raw/Examples/01%20Loading%20Dataset)
+https://github.com/JimDuggan/p2synthr/tree/main/data-raw/Examples/01%20OWID)
 
 ### Author Information
 
