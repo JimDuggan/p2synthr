@@ -1,0 +1,69 @@
+---
+output: github_document
+title:  Example 1 - Loading aimsir17
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+```
+
+The first step (after installing the package) is to load the library, along with the library dplyr.
+
+```{r,echo=T,message=FALSE}
+library(aimsir17)
+library(dplyr)
+```
+
+There are two datasets that can be used. The first is **observations**
+
+```{r,echo=T}
+observations
+```
+
+To get see all the variables, use the glimpse() function.
+
+```{r,echo=T}
+glimpse(observations)
+```
+
+The following variables are recored for each observation:
+
+- **station** (weather station name)
+- **year**    (2017)
+- **month**   (month of year 1-12)
+- **day**     (day of month 1-31)
+- **date**    (date object in R)
+- **rain**    (hourly rainfall in mm)
+- **temp**    (hourly temperature in C)
+- **rhum**    (Relative Humidity - percent)
+- **msl**     (Mean Sea Level Pressure - hPa)
+- **wdsp**    (Mean Wind Speed - knots)
+- **wddir**   (Predominant Wind Direction - degree)
+
+The second data set is  **stations**, which can be linked to **observations** via the the variable **station**
+
+```{r,echo=T}
+stations %>% print(n=25)
+```
+
+The following variables are recored for each station:
+
+- **station**   (weather station name)
+- **county**    (location)
+- **height**    (height above sea level (m))
+- **latitude**  (location coordinates)
+- **longitude**  (location coordinates)
+
+A summary of all the observations can be viewed using dplyr.
+```{r,echo=T}
+observations %>% 
+  group_by(station) %>% 
+  summarise(TotalRecords=n()) %>%
+  print(n=25)
+```
+
+A summary of the overall data set can also be viewed. From the summaries, it can be seen that there are s very small number of missing values in the data set.
+```{r,echo=T}
+summary(observations)
+```
+

@@ -5,7 +5,7 @@ Authors@R:
     person(given = "Jim",
            family = "Duggan",
            role = c("aut", "cre"),
-           email = "jim.duggan@universityofgalway.ie",
+           email = "jim.duggan@nuigalway.ie",
            comment = c(ORCID = "0000-0002-7507-8617"))
 Description: Provides a set of functions that can be used to generate synthetic epi data
 License: Creative Commons Attribution 4.0 International License

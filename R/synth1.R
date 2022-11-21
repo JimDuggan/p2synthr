@@ -21,9 +21,6 @@ synth1<- function(ts_data, group_names, group_prob, setSeed=F, seedValue=100){
   else if(sum(group_prob) != 1.0)
           stop("Error, sum of probabilities not equal to 1")
   
-  # # Replace any NA values with 0, should be ok for incidence.
-  # ts_data[is.na(ts_data)] <- 0
-  
   if(setSeed)
     set.seed(seedValue)
   
