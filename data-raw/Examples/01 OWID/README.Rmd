@@ -21,3 +21,45 @@ Check the dataset `owid`
 ```{r,echo=T}
 owid
 ```
+
+
+Extract cases (from Ireland) as a vector
+
+```{r,echo=T}
+irl <- owid |>
+        filter(location=="Ireland") |>
+        pull(new_cases)
+
+head(irl)
+summary(irl)
+```
+       
+Call the function `synth1()` with the following arguments
+
+* The input vector from which the synthetic data will be created
+* The argument `group_names` which contains the sub-group names
+* The argument `group_prob` which holds the probability of each group bring selected
+
+```{r,echo=T} 
+irl_syn_age <- synth1(irl,
+                  group_names=c("00-19","20-39","40+"),
+                  group_prob = c(0.20,0.40,0.40))
+
+irl_syn_age
+sample_n(irl_syn_age,10)
+```
+
+For convenience, convert the output to tidy data.
+```{r,echo=T}
+irl_tidy <- irl_syn_age |>
+               pivot_longer(names_to="Age",
+                            values_to="Incidence",
+                            `00-19`:`40+`)
+
+irl_tidy
+```
+
+Plot the results.
+```{r,echo=T}
+ggplot(irl_tidy,aes(x=Index,y=Incidence,fill=Age))+geom_area()+ggtitle("Synthetic Data")
+```
