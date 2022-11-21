@@ -1,6 +1,6 @@
 ---
 output: github_document
-title:  Example 1 - Generating synthetic data from COVOD-19 Cases
+title:  Example 1 - Generating synthetic data from COVID-19 Cases
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)

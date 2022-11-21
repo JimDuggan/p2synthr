@@ -8,7 +8,7 @@ To install, type the following command in R.
 devtools::install_github("JimDuggan/p2synthr")
 
 ### Examples
-Here are some example that may be useful
+Here are some examples that may be useful
 
 - [Creating synthetic data from our world in data](
 https://github.com/JimDuggan/p2synthr/tree/main/data-raw/Examples/01%20OWID)
