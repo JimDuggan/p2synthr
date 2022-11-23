@@ -6,6 +6,7 @@ library(p2synthr)
 
 epi <- fx |>
         select(Time,Synthetic_incidence_A:Synthetic_incidence_C) |>
+        filter(Time <= 120) |>
                pivot_longer(names_to="TSVariable",
                             values_to="Incidence",
                             -Time)
