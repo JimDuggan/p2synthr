@@ -13,6 +13,9 @@ Here are some examples that may be useful
 - [Creating synthetic data from our world in data](
 https://github.com/JimDuggan/p2synthr/tree/main/data-raw/Examples/01%20OWID)
 
+- [Creating participatory surveillance synthetic data](
+https://github.com/JimDuggan/p2synthr/tree/main/data-raw/Examples/02%20Participatory%20Surveillance)
+
 ### Author Information
 
 - Author: Jim Duggan

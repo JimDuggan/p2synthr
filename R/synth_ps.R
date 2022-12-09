@@ -17,7 +17,8 @@ library(purrr)
 #' @param set_seed flag for setting the seed
 #' @param SEED value for the seed
 #' @param rbinomial_size dispersion parameter for negative binomial sample.
-#' @return tibble with synthetic participatory surveillance numbers
+#' @return tibble output data
+#'         
 #' @export
 #' 
 synth_ps <- function(weekly_cases,
@@ -39,7 +40,7 @@ synth_ps <- function(weekly_cases,
   L <- length(weekly_cases)
   total_enrolled <- round(population_size*proportion_enrolled,0)
   weekly_active_users <- round(total_enrolled * runif(L,active_users_lower,active_users_upper),0)
-  total_estimated_cases <- round(weekly_cases/reporting_fraction,0)
+  total_estimated_cases <- weekly_cases/reporting_fraction
   self_reported_cases <- (total_estimated_cases / population_size) * weekly_active_users * 
                             (1+false_positive_fraction)
   self_reported_cases <- round(self_reported_cases,0)
@@ -50,21 +51,24 @@ synth_ps <- function(weekly_cases,
                                                      mu=.x,
                                                      size=rbinomial_size))
   
-  tibble::tibble(Index=1:L,
-         Date=dates,
-         Year=year(Date),
-         Week=week(Date),
-         WeeklyCases=weekly_cases,
-         ReportingFraction=rep(reporting_fraction,L),
-         EstimatedCasesDet=total_estimated_cases,
-         Population=rep(population_size,L),
-         ProportionEnrolled=rep(proportion_enrolled,L),
-         LeadingTime=rep(leading_time,L),
-         FPFraction=rep(false_positive_fraction,L),
-         TotalEnrolled=total_enrolled,
-         WeeklyActiveUsers=weekly_active_users,
-         PSReportedCasesDet=self_reported_cases_lead,
-         PSSyntheticReported= self_reported_cases_lead_noise)
+
+  ans <- tibble::tibble(Index=1:L,
+           Date=dates,
+           Year=year(Date),
+           Week=week(Date),
+           WeeklyCases=weekly_cases,
+           ReportingFraction=rep(reporting_fraction,L),
+           EstimatedCasesDet=as.integer(total_estimated_cases),
+           Population=rep(population_size,L),
+           ProportionEnrolled=rep(proportion_enrolled,L),
+           LeadingTime=rep(leading_time,L),
+           FPFraction=rep(false_positive_fraction,L),
+           TotalEnrolled=total_enrolled,
+           WeeklyActiveUsers=weekly_active_users,
+           AttackRateReported=weekly_cases/population_size,
+           AttackRateEstimated=total_estimated_cases/population_size,
+           PSReportedCasesMean=self_reported_cases_lead,
+           PSSyntheticReported= self_reported_cases_lead_noise)
+  ans
     
-  
 }

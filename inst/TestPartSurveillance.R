@@ -15,7 +15,7 @@ irl <- owid %>%
 ps <- synth_ps(pull(irl,cases),
                dates=pull(irl,date),
                population_size = 5000000,
-               reporting_fraction = 0.70,
+               reporting_fraction = .70,
                proportion_enrolled = 0.005,
                leading_time = 2,
                false_positive_fraction = 0.05,
@@ -41,6 +41,9 @@ cors <- ccf(pull(ps_cc,WeeklyCases),
 cors <- ccf(pull(ps_cc,PSSyntheticReported),
             pull(ps_cc,WeeklyCases),
             plot=F)
+
+cors_t <- tibble(Lag = as.integer(cors$lag),
+                 ACF = as.numeric(cors$acf))
 
 p3 <- ggplot(cors_t,aes(x=Lag,y=ACF))+geom_col(width = .1)
 

@@ -43,7 +43,9 @@ synth_ps(
 \item{fp_fraction}{fraction false positives}
 }
 \value{
-tibble with synthetic participatory surveillance numbers
+tibble with the following columns
+
+Index observation identifier starting at 1
 }
 \description{
 \code{synth_ps} 
