@@ -18,6 +18,10 @@ irl_syn_age <- synth1(irl,
                   group_names=c("00-19","20-39","40+"),
                   group_prob = c(0.20,0.40,0.40))
 
+irl_syn_gen <- synth1(irl,
+                      group_names=c("Male","Female"),
+                      group_prob = c(0.30,0.70))
+
 irl_tidy <- irl_syn_age |>
                pivot_longer(names_to="Age",
                             values_to="Incidence",

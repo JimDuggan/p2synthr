@@ -14,7 +14,7 @@ Depends: R (>= 2.10)
 Suggests: 
     dplyr, tidyr
 Imports: 
-    tibble
+    tibble,purrr,dplyr,lubridate
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/JimDuggan/p2synthr

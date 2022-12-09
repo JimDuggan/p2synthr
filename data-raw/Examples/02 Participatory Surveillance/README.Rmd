@@ -1,0 +1,95 @@
+---
+output: github_document
+title:  Example 2 - Generating synthetic participatory surveillance data
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+```
+
+The first step (after installing the package) is to load the library, along with the library dplyr, lubridate, ggpubr and ggplot2.
+
+```{r,echo=T,message=FALSE}
+library(p2synthr)
+library(lubridate)
+library(dplyr)
+library(ggpubr)
+library(ggplot2)
+```
+
+Our goal is to create a plausible signal of weekly particpatory surveillance results, based on the input signal of real cases (our world in data for COVID-19).
+We take in daily values fro Ireland, add the year and week, and group by year and week, summing all the new cases.
+
+```{r,echo=T}
+irl <- owid %>%
+        select(date,location,new_cases) %>%
+        mutate(year=year(date),
+               week=week(date)) %>%
+        filter(location=="Ireland") %>%
+        group_by(year,week) %>%
+        summarise(date=first(date),cases=sum(new_cases,na.rm=T))
+irl
+```
+
+Next, we call the function `synth_ps()`, which generates the participatory signal. The parameters include:
+
+- The real cases
+- The dates, as a date format
+- The population size 
+- The estimated reporting fraction. We assume that not all people have been. detected, but that they may be detected by a participatory surveillance system. So the total number of cases is amplified to take this into account.
+- The proportion enrolled, values such as half of one percent are reasonable.
+- The leading time for the signal. We assume that the paricipatory surveillance system will pick up infections before the public health surveillance system. Two weeks might be somewhat long, but it is used just to test the function.
+- The false postive fraction, which models people making an incorrect diagnosis for an illness. This will increase the number of notifications.
+- Whether to used a seed (`set_seed`) and what the seed should be `SEED`.
+- The size parameter for the [negative binomial distribution](https://betanalpha.github.io/assets/case_studies/probability_densities.html#32_the_negative_binomial_family), the lower, the more noisy the sampled data. As the size increases, then the distribution starts to approximate the Poisson distribution.
+- The range for active users, which is the proportion of registered users who report each week.
+
+```{r,warning=FALSE,echo=T}
+ps <- synth_ps(pull(irl,cases),
+               dates=pull(irl,date),
+               population_size = 5000000,
+               reporting_fraction = 0.70,
+               proportion_enrolled = 0.005,
+               leading_time = 2,
+               false_positive_fraction = 0.05,
+               set_seed = F,
+               SEED=100,
+               rbinomial_size = 2,
+               active_users_lower = 0.65,
+               active_users_upper = 0.80)
+```
+
+The output tibble contains all the information used in calculating the synthetic values.
+
+```{r}
+glimpse(ps)
+```
+
+We can now show the results via three plots. These include:
+
+- A plot of the cases (real data)
+- A time series of synthetic weekly reported cases via participatory surveillance
+- A ccf plot showing the lagged relationships between the synthetic data and teh real cases.
+
+```{r}
+p1 <- ggplot(irl,aes(x=date,y=cases))+geom_col(colour="steelblue")+
+  xlab("Date")+ylab("Reported Cases")
+
+p2 <- ggplot(ps,aes(x=Date,y=PSSyntheticReported))+geom_line()+geom_point()+
+      xlab("Date")+ylab("Synthetic Reported Infections (PS)")
+
+ps_cc <- ps %>%
+          filter(complete.cases(ps))
+
+cors <- ccf(pull(ps_cc,PSSyntheticReported),
+            pull(ps_cc,WeeklyCases),
+            plot=F)
+
+cors_t <- tibble(Lag = as.integer(cors$lag),
+                 ACF = as.numeric(cors$acf))
+
+p3 <- ggplot(cors_t,aes(x=Lag,y=ACF))+geom_col(width = .1)
+
+p4 <- ggarrange(p1,p2,p3,nrow=3)
+p4
+```
