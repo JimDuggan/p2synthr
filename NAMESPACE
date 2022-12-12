@@ -2,4 +2,5 @@
 
 export(synth1)
 export(synth_ps)
+export(synth_variants)
 importFrom(tibble,tibble)

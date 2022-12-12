@@ -43,9 +43,7 @@ synth_ps(
 \item{fp_fraction}{fraction false positives}
 }
 \value{
-tibble with the following columns
-
-Index observation identifier starting at 1
+tibble output data
 }
 \description{
 \code{synth_ps} 

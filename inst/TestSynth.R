@@ -4,7 +4,7 @@ library(tidyr)
 library(p2synthr)
 
 # Some useful commands for package building
-# devtools::document() for dcoumentation
+# devtools::document() for documentation
 # devtools::check()
 # devtools::build()
 # devtools::install_github("JimDuggan/p2synthr")
