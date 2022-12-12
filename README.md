@@ -16,6 +16,8 @@ https://github.com/JimDuggan/p2synthr/tree/main/data-raw/Examples/01%20OWID)
 - [Creating participatory surveillance synthetic data](
 https://github.com/JimDuggan/p2synthr/tree/main/data-raw/Examples/02%20Participatory%20Surveillance)
 
+- [Generating synthetic variant data for cases, based on a cascaded logistic growth model with 5 successive variants](https://github.com/JimDuggan/p2synthr/tree/main/data-raw/Examples/03%20Variants)
+
 ### Author Information
 
 - Author: Jim Duggan

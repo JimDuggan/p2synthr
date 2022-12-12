@@ -7,7 +7,7 @@ Generates cases for five successive variants}
 \usage{
 synth_variants(
   cases_ts,
-  time = length(cases_ts),
+  the_dates,
   percent_genomic_surveillance_min = 0.5,
   percent_genomic_surveillance_max = 0.8,
   variant_start_time_fractions = c(st_02 = 0.1, st_03 = 0.3, st_04 = 0.5, st_05 = 0.7),
@@ -21,7 +21,7 @@ synth_variants(
 \arguments{
 \item{cases_ts}{time series of cases}
 
-\item{time}{the number of observations in the time series}
+\item{the_dates}{the actual dates of teh time series}
 
 \item{percent_genomic_surveillance_min}{the min percentage of cases that are sequenced}
 
