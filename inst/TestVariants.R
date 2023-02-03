@@ -4,7 +4,7 @@ library(ggplot2)
 library(tidyr)
 
 irl <- owid |>
-  filter(location=="Ireland") |>
+  filter(location=="United Kingdom") |>
   select(date,new_cases)
 
 synth_var <- synth_variants(pull(irl,new_cases),
